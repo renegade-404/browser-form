@@ -1,3 +1,10 @@
+/*variables*/
+:root {
+  --b-radius: 6px;
+  --bg-color: linear-gradient(47deg,rgba(247, 74, 149, 1) 0%, rgba(119, 165, 229, 1) 53%);
+}
+
+
 /*normalize*/
 *, *::before, *::after {
   box-sizing: border-box;
@@ -14,6 +21,11 @@
 }
 
 body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -44,3 +56,47 @@ h1, h2, h3, h4, h5, h6 {
 #root, #__next {
   isolation: isolate;
 }
+
+/*containers*/
+form,
+.main-container,
+form > * {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-container {
+  width: 50%;
+  height: 70%;
+  border-radius: var(--b-radius);
+  background: var(--bg-color);
+
+  justify-content: space-around;
+  align-items: center;
+}
+
+/*validation*/
+
+.active-submit {
+  border-color: #990000;
+  background-color: #ffdddd;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+.error {
+  width: 100%;
+  padding: 0;
+
+  font-size: 80%;
+  color: white;
+  background-color: #990000;
+  border-radius: 0 0 5px 5px;
+
+  box-sizing: border-box;
+}
+
+
+
