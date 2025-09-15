@@ -1,7 +1,7 @@
 {
-  "name": "dropdown-menu-toggle",
+  "name": "browser-form",
   "version": "1.0.0",
-  "description": "toggle menu implementer",
+  "description": "a simple browser form",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/renegade-404/toggle-menu-implementer.git"
+    "url": "git+https://github.com/renegade-404/browser-form.git"
   },
   "keywords": [],
   "author": "maru <mypcisrenegade@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "git+https://github.com/renegade-404/toggle-menu-implementer/issues"
+    "url": "git+https://github.com/renegade-404/browser-form/issues"
   },
-  "homepage": "git+https://github.com/renegade-404/toggle-menu-implementer#readme",
+  "homepage": "git+https://github.com/renegade-404/browser-form#readme",
   "devDependencies": {
     "css-loader": "^7.1.2",
     "html-loader": "^5.1.0",
