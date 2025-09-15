@@ -23,6 +23,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  background-color: rgb(41, 41, 142);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,8 +87,12 @@ input:focus:invalid {
   outline: none;
 }
 
-.error {
+input {
   width: 100%;
+}
+
+span.error {
+  width: 34ch;
   padding: 0;
 
   font-size: 80%;
@@ -95,7 +100,6 @@ input:focus:invalid {
   background-color: #990000;
   border-radius: 0 0 5px 5px;
 
-  box-sizing: border-box;
 }
 
 
