@@ -16,11 +16,10 @@ export const validator = (input, inputType) => {
       tooLong: () =>
         `This field should be maximum ${input.maxLength} characters; you entered ${input.value.length}.`,
       patternMismatch:
-        "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters",
+        "Must consist of at least: 1 upper case letter, a number, a special character, between 8-32 characters.",
     },
     "password-confirmation": {
-      valueMissing: "Please confirm your password.",
-      customError: "Passwords do not match.", // you’d set this with setCustomValidity
+      valueMissing: "Please confirm your password."
     },
   };
 
@@ -29,13 +28,10 @@ export const validator = (input, inputType) => {
       const country = document.getElementById("country");
       const postalCodeField = input;
       const constraints = {
-        pl: ["^(CH-)?\\d{4}$", "e.g. CH-1950 or 1950"],
-        jp: ["^(F-)?\\d{5}$", "e.g. F-75012 or 75012"],
+        pl: ["^(PL-)?\\d{2}-\\d{3}$", "e.g. PL-00-001 or 00-001"],
+        jp: ["^(JP-)?\\d{3}-\\d{4}$", "e.g. JP-100-0001 or 100-0001"],
         de: ["^(D-)?\\d{5}$", "e.g. D-12345 or 12345"],
-        fin: [
-          "^(NL-)?\\d{4}\\s*([A-RT-Z][A-Z]|S[BCE-RT-Z])$",
-          "Must have exactly 4 digits",
-        ],
+        fin: ["^(FI-)?\\d{5}$", "e.g. FI-00100 or 00100"],
       };
       country.addEventListener("change", () => {
         postalCodeField.setAttribute(
@@ -63,6 +59,20 @@ export const validator = (input, inputType) => {
       if (!errorMessage) return false;
       error.textContent = errorMessage;
     },
+    password: () => {
+      const errorMessage = getErrorMessage();
+      if (!errorMessage) return false;
+      error.textContent = errorMessage;
+    },
+    "password-confirmation": () => {
+      const passwordInput = document.getElementById("password");
+      if (input.value !== passwordInput.value) {
+        error.textContent = "Passwords don't match."
+      }
+      const errorMessage = getErrorMessage();
+      if (!errorMessage) return false;
+      error.textContent = errorMessage;
+    }
   };
 
   function getErrorMessage() {
@@ -81,17 +91,12 @@ export const validator = (input, inputType) => {
     if (input && inputType) {
       error.textContent = "";
     }
-    const errorFn = errorFunction[inputType]();
-    if (!errorFn) {
-      return false;
-    }
+    errorFunction[inputType]();
   }
 
-  return isError();
+  isError();
 };
 
 //TODO:
-// if input not focused: errorSpan = ""
 // if country changed: postalCode placeholder change immediately
 // figure out how to handle select event so postal placeholder changes
-// loop input elements
