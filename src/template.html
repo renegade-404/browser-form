@@ -11,7 +11,7 @@
       <form novalidate>
         <div class="email-input">
           <label for="email">Provide your email address:</label
-          ><input type="email" id="email" name="email" required/><span
+          ><input type="email" id="email" name="email" maxlength="254" placeholder="youare@cool.com" required/><span
             class="error"
           ></span>
         </div>
@@ -21,14 +21,13 @@
             <option value="select" style="display: none;">Select</option>
             <option value="pl">Poland</option>
             <option value="jp">Japan</option>
-            <option value="ger">Germany</option>
-            <option value="fr">France</option>
+            <option value="de">Germany</option>
             <option value="fin">Finland</option></select
           ><span class="error"></span>
         </div>
         <div class="postal-input">
           <label for="postal-code">Postal code of you country:</label
-          ><input type="postal-code" id="postal-code" name="postal-code" placeholder="" required/><span
+          ><input type="postal-code" id="postal-code" name="postal-code" placeholder="You need to select a country first." required/><span
             class="error"
           ></span>
         </div>
@@ -39,17 +38,19 @@
             id="password"
             name="password"
             minlength="8"
-            maxlength="20"
+            maxlength="32"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+            placeholder="Aa-Zz, a number, a special character, 8-32"
             required
           /><span class="error"></span>
         </div>
         <div class="conf-pass-input">
-          <label for="conf-password">Confirm your password:</label
+          <label for="password-confirmation">Confirm your password:</label
           ><input
             type="password"
-            id="conf-password"
+            id="password-confirmation"
             minlength="8"
-            maxlength="20"
+            maxlength="32"
             required
           /><span class="error"></span>
         </div>
