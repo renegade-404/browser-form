@@ -102,5 +102,9 @@ span.error {
 
 }
 
+input::placeholder {
+  color: darkgrey;
+}
+
 
 
