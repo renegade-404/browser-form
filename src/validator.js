@@ -1,4 +1,4 @@
-export const validator = (input, inputType) => {
+export const liveValidation = (input, inputType) => {
   const error = document.querySelector(`#${inputType} + span.error`);
 
   const errorMessages = {
@@ -16,14 +16,14 @@ export const validator = (input, inputType) => {
       tooLong: () =>
         `This field should be maximum ${input.maxLength} characters; you entered ${input.value.length}.`,
       patternMismatch:
-        "Must consist of at least: 1 upper case letter, a number, a special character, between 8-32 characters.",
+        "Must consist of at least: 1 upper case letter, a number, a special character and be between 8-32 characters.",
     },
     "password-confirmation": {
       valueMissing: "Please confirm your password."
     },
   };
 
-  const errorFunction = {
+  const errorFunctions = {
     "postal-code": () => {
       const country = document.getElementById("country");
       const postalCodeField = input;
@@ -67,12 +67,12 @@ export const validator = (input, inputType) => {
     "password-confirmation": () => {
       const passwordInput = document.getElementById("password");
       if (input.value !== passwordInput.value) {
-        error.textContent = "Passwords don't match."
+        error.textContent = "Passwords don't match.";
       }
       const errorMessage = getErrorMessage();
       if (!errorMessage) return false;
       error.textContent = errorMessage;
-    }
+    },
   };
 
   function getErrorMessage() {
@@ -88,14 +88,28 @@ export const validator = (input, inputType) => {
   }
 
   function isError() {
-    if (input && inputType) {
-      error.textContent = "";
-    }
-    errorFunction[inputType]();
+    error.textContent = "";
+    errorFunctions[inputType]();
+    error.classList.add("active");
   }
 
   isError();
 };
+
+export const globalValidation = (inputs) => { // add select
+  const validationMessage = document.querySelector(".global-validation");
+  let notValidatedFields = [];
+  inputs.forEach(input => {
+    if (!input.validity.valid) notValidatedFields.push(input);
+  })
+  if (notValidatedFields.length === 0) {
+    validationMessage.hidden = true;
+  } else {
+    validationMessage.textContent = `These are not validated: ${notValidatedFields}`;
+    validationMessage.hidden = false;
+  }
+  
+}
 
 //TODO:
 // if country changed: postalCode placeholder change immediately
