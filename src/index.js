@@ -1,5 +1,5 @@
 import "./style.css";
-import { validator } from "./validator";
+import { liveValidation, globalValidation } from "./validator";
 
 
 const submitButton = document.querySelector(".submit-button");
@@ -8,11 +8,12 @@ const form = document.querySelector("form");
 const inputs = document.querySelectorAll("input");
 
 inputs.forEach(input => {
-  input.addEventListener("input", () => validator(input, input.id));
+  input.addEventListener("input", () => liveValidation(input, input.id));
 })
 
 submitButton.addEventListener("click", (e) => {
-    if (!form.checkValidity()) {
-      e.preventDefault();
-    } 
+  // globalValidation(inputs);
+  if (!form.checkValidity()) {
+    e.preventDefault();
+  } 
 });
