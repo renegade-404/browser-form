@@ -40,7 +40,7 @@
             minlength="8"
             maxlength="32"
             pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-            placeholder="Aa-Zz, a number, a special character, 8-32"
+            placeholder="Char.: 8-32, Aa-Zz, @$!%*#?&, 0-9"
             required
           /><span class="error"></span>
         </div>
@@ -55,7 +55,10 @@
           /><span class="error"></span>
         </div>
       </form>
-      <button type="submit" class="submit-button">Submit</button>
+      <div>
+        <button type="submit" class="submit-button">Submit</button>
+        <span class="global-validation" hidden></span>
+      </div>
       <p class="notation">Note: All fields are required</p>
     </div>
   </body>
