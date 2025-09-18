@@ -68,12 +68,22 @@ form > * {
 
 .main-container {
   width: 50%;
-  height: 70%;
+  height: 90%;
   border-radius: var(--b-radius);
   background: var(--bg-color);
 
   justify-content: space-around;
   align-items: center;
+}
+
+form {
+  width: 70%;
+  align-items: center;
+  gap: 5px;
+}
+
+form > * {
+  width: 70%;
 }
 
 /*validation*/
@@ -92,7 +102,7 @@ input {
 }
 
 span.error {
-  width: 34ch;
+  width: 100%;
   padding: 0;
 
   font-size: 80%;
@@ -106,5 +116,20 @@ input::placeholder {
   color: darkgrey;
 }
 
+.error.active {
+  padding: 3px;
+}
 
+input:valid + span.error.active {
+  padding: 0px;
+}
+
+.global-validation {
+  position: absolute;
+  font-size: 0.8rem;
+  width: 25ch;
+  height: fit-content;
+  border: 3px solid brown;
+  right: 28%;
+}
 
