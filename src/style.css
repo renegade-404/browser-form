@@ -86,6 +86,7 @@ form > * {
   width: 70%;
 }
 
+
 /*validation*/
 
 .active-submit {
@@ -93,12 +94,11 @@ form > * {
   background-color: #ffdddd;
 }
 
-input:focus:invalid {
-  outline: none;
-}
-
 input {
   width: 100%;
+  outline-style: none;
+  border-style: none;
+  border-radius: var(--b-radius);
 }
 
 span.error {
@@ -120,16 +120,25 @@ input::placeholder {
   padding: 3px;
 }
 
-input:valid + span.error.active {
+input:valid + span.error {
   padding: 0px;
 }
+
 
 .global-validation {
   position: absolute;
   font-size: 0.8rem;
   width: 25ch;
   height: fit-content;
-  border: 3px solid brown;
-  right: 28%;
+  white-space: pre-wrap;
+  right: 25%;
+  top: 66%;
 }
 
+input:valid {
+  border: 2px solid green;
+}
+
+input:disabled::placeholder {
+  color: darkred;
+}
