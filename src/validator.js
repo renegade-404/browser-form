@@ -33,14 +33,13 @@ export const liveValidation = (input, inputType) => {
         de: ["^(D-)?\\d{5}$", "e.g. D-12345 or 12345"],
         fin: ["^(FI-)?\\d{5}$", "e.g. FI-00100 or 00100"],
       };
-      country.addEventListener("change", () => {
         postalCodeField.setAttribute(
           "placeholder",
           constraints[country.value][1]
         );
-      });
-      if (country.value !== "select") {
+
         const constraint = new RegExp(constraints[country.value][0], "");
+        input.pattern = constraint;
 
         if (constraint.test(postalCodeField.value)) {
           error.textContent = "";
@@ -48,11 +47,7 @@ export const liveValidation = (input, inputType) => {
           error.textContent = `The postal code doesn't match the pattern:
           ${constraints[country.value][1]}`;
         }
-      } else {
-        const errorMessage = getErrorMessage();
-        if (errorMessage) error.textContent = errorMessage;
-        else return false;
-      }
+
     },
     email: () => {
       const errorMessage = getErrorMessage();
@@ -66,8 +61,12 @@ export const liveValidation = (input, inputType) => {
     },
     "password-confirmation": () => {
       const passwordInput = document.getElementById("password");
-      if (input.value !== passwordInput.value) {
+      input.setCustomValidity("Passwords don't match");
+      if (input.value !== passwordInput.value && passwordInput.validity.valid) {
         error.textContent = "Passwords don't match.";
+      }
+      if (passwordInput.validity.valid && input.value === passwordInput.value) {
+        input.setCustomValidity("");
       }
       const errorMessage = getErrorMessage();
       if (!errorMessage) return false;
@@ -89,8 +88,18 @@ export const liveValidation = (input, inputType) => {
 
   function isError() {
     error.textContent = "";
-    errorFunctions[inputType]();
-    error.classList.add("active");
+    if (input.id === "postal-code") errorFunctions[inputType]();
+    else {
+      input.addEventListener("blur", () => {
+      errorFunctions[inputType]();
+      error.classList.add("active");
+    })
+    }
+    
+    input.addEventListener("focus", () =>{
+      error.textContent = "";
+      error.classList.remove("active");
+    }) 
   }
 
   isError();
@@ -98,14 +107,14 @@ export const liveValidation = (input, inputType) => {
 
 export const globalValidation = (inputs) => { // add select
   const validationMessage = document.querySelector(".global-validation");
-  let notValidatedFields = [];
+  let notValidatedFields = `Not validated fields:`;
   inputs.forEach(input => {
-    if (!input.validity.valid) notValidatedFields.push(input);
+    if (!input.validity.valid || input.disabled) notValidatedFields+= `\n- ${input.name}`;
   })
   if (notValidatedFields.length === 0) {
     validationMessage.hidden = true;
   } else {
-    validationMessage.textContent = `These are not validated: ${notValidatedFields}`;
+    validationMessage.textContent = notValidatedFields;
     validationMessage.hidden = false;
   }
   
